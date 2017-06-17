@@ -13,11 +13,7 @@ import chbasic.utils.CommonUtils;
 import chbasic.utils.ConstantMapper;
 import chbasic.utils.UIDriver;
 import chbasic.utils.UIPopulation;
-/**
- * 
- * @author abhishekr.gupta
- * 
- */
+
 public class NavigationTab {
 
 	UIDriver iedriver;
@@ -29,19 +25,18 @@ public class NavigationTab {
 
 	public NavigationTab(String home_or_path, UIDriver driver) throws MalformedURLException {
 		iedriver = driver;
-		uiPopulation = new UIPopulation(home_or_path, null, iedriver);		
+		uiPopulation = new UIPopulation(home_or_path, null, iedriver);
 		logger.info("home page clicked");
 	}
 
-	public boolean navigateLink(String name) throws XPathExpressionException,
-			IOException, ParserConfigurationException, SAXException {
+	public boolean navigateLink(String name)
+			throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
 		try {
 			xpath = "/search_order/order_type_tab/" + name;
 			logger.info("xpath appended by the node name in SEARCH_NAV_BAR.xml");
 			String home_locator = uiPopulation.getNodeValByXpath(xpath);
 			System.out.println("11111111111111" + home_locator);
-			logger.info("Node value(locator) of the given node::"
-					+ home_locator);
+			logger.info("Node value(locator) of the given node::" + home_locator);
 			Thread.sleep(7000);
 			iedriver.findElement(cmn.getLocator(home_locator)).click();
 			return true;

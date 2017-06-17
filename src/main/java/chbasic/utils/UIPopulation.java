@@ -52,11 +52,8 @@ public class UIPopulation {
 	 */
 	public UIPopulation(String or_path, String test_path, UIDriver driver) throws MalformedURLException {
 		iedriver = driver;
-		logger.info(
-				"------------------------------------------------------------------------------------------------------------------------------------******** Started populating*******------------------------------------------------------------------------------------------------------------------------------------------");
-		logger.info(
-				"----------------------------------------------------------------------------------------------test_path is--------------------------------------------------------------------------------------------------------------------------------- :"
-						+ test_path);
+		logger.info("-----******** Started populating*******--------------------");
+		logger.info("----------------------test_path is---------------- :" + test_path);
 		try {
 			if (test_path != null) {
 				DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -85,8 +82,7 @@ public class UIPopulation {
 	 * @throws MalformedURLException
 	 * @throws InterruptedException
 	 */
-	public UIPopulation(InputStream or_path, InputStream test_path, UIDriver driver)
-			throws MalformedURLException, InterruptedException {
+	public UIPopulation(InputStream or_path, InputStream test_path, UIDriver driver) {
 		iedriver = driver;
 		logger.info("******** Started populating*******");
 		try {
@@ -112,7 +108,7 @@ public class UIPopulation {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public boolean populate() throws InterruptedException {
+	public boolean populate() {
 		boolean flag = false;
 
 		try {

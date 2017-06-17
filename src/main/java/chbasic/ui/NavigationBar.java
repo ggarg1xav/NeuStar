@@ -29,14 +29,13 @@ public class NavigationBar {
 		logger.info("home page clicked");
 	}
 
-	public boolean navigateLink(String name) throws XPathExpressionException,
-			IOException, ParserConfigurationException, SAXException {
+	public boolean navigateLink(String name)
+			throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
 		try {
 			xpath = "/home/home_loc/" + name;
 			logger.info("xpath appended by the node name in HOME.xml");
 			String home_locator = uiPopulation.getNodeValByXpath(xpath);
-			logger.info("Node value(locator) of the given node::"
-					+ home_locator);
+			logger.info("Node value(locator) of the given node::" + home_locator);
 
 			iedriver.findElement(cmn.getLocator(home_locator)).click();
 			return true;

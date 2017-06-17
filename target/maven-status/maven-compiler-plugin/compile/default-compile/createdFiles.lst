@@ -1,9 +1,11 @@
 chbasic\ui\OrderHistory.class
 chbasic\utils\FieldUtils.class
+chbasic\utils\DBConnectionSource.class
 chbasic\ui\NavigationBar.class
 chbasic\ui\CreateOrder.class
 chbasic\ui\Login.class
 chbasic\utils\UIPopulation.class
+chbasic\utils\DBTableValidator.class
 chbasic\ui\NavigationTab.class
 chbasic\utils\ConstantMapper.class
 chbasic\utils\ReadProperties.class

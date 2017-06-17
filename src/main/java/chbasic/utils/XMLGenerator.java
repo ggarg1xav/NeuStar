@@ -22,31 +22,7 @@ import org.w3c.dom.Element;
 public class XMLGenerator {
 
 	FileInputStream fileInputStream;
-//	Workbook myWorkBook;
 	ReadProperties rp = new ReadProperties();
-
-/*	public XMLGenerator(String fileName) {
-		try {
-			fileInputStream = new FileInputStream(fileName);
-			myWorkBook = WorkbookFactory.create(fileInputStream);
-
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	}
-
-	public static void addColumnValue(Sheet mySheet,
-			ArrayList<String> locatorarray, int cells) {
-		Row row = mySheet.getRow(0);
-		locatorarray.clear();
-		for (int c = 0; c < cells; c++) {
-
-			Cell cell = row.getCell((short) c);
-			if (cell != null) {
-				locatorarray.add(cell.getStringCellValue());
-			}
-		}
-	}*/
 
 	/**
 	 * function that generates XML file of each excel file row
@@ -56,12 +32,10 @@ public class XMLGenerator {
 	 * @param tcName
 	 * @param outPath
 	 */
-	public void generateXML(String[] tcContentArray, String sheetName,
-			String tcName, String outPath) {
+	public void generateXML(String[] tcContentArray, String sheetName, String tcName, String outPath) {
 		try {
 			String[] tcContetntVal = tcContentArray;
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
 			// root elements
@@ -85,13 +59,11 @@ public class XMLGenerator {
 			doc.appendChild(rootElement);
 
 			// write the content into xml file
-			TransformerFactory transformerFactory = TransformerFactory
-					.newInstance();
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
 
-			StreamResult result = new StreamResult(new File(outPath + "\\"
-					+ tcName + ".xml"));
+			StreamResult result = new StreamResult(new File(outPath + "\\" + tcName + ".xml"));
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);

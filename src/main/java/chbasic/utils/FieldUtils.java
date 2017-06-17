@@ -39,7 +39,9 @@ import org.w3c.dom.Document;
  * @author abhishekr.gupta
  * 
  */
+@SuppressWarnings("deprecation")
 public class FieldUtils {
+	@SuppressWarnings("unused")
 	private static Logger LOGGER = Logger.getLogger(FieldUtils.class);
 	public static String[] formats = { "dd/MM/yyyy", "MM/dd/yyyy hh:mm:ss", "E MMM dd HH:mm:ss zzz yyyy" };
 
@@ -325,7 +327,6 @@ public class FieldUtils {
 	public Document stringToDom(String clobData) {
 		Document doc = null;
 		try {
-			@SuppressWarnings("deprecation")
 			InputStream ios = new StringBufferInputStream(clobData);
 			DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
 			dbfactory.setNamespaceAware(false);

@@ -70,15 +70,12 @@ public class OrderHistory {
 			for (int k = 0; k < 20; k++) {
 				iedriver.refresh();
 				List<WebElement> testTable = iedriver
-						.findElements(By
-								.xpath("//table[@class='Main']/tbody/tr[5]/td/table/tbody/tr/td[3]"));
+						.findElements(By.xpath("//table[@class='Main']/tbody/tr[5]/td/table/tbody/tr/td[3]"));
 
 				for (int j = 0; j < (testTable.size() - 1); j++) {
 					logger.info("looping in table row");
-					if (!iedriver
-							.findElement(
-									By.xpath("//table[@class='Main']/tbody/tr[5]/td/table/tbody/tr/td[3]"))
-									.isDisplayed()) {
+					if (!iedriver.findElement(By.xpath("//table[@class='Main']/tbody/tr[5]/td/table/tbody/tr/td[3]"))
+							.isDisplayed()) {
 
 						logger.info("Transaction form not available");
 						flag = false;
@@ -86,17 +83,14 @@ public class OrderHistory {
 
 					} else {
 						String respFrmGui = testTable.get(j).getText();
-						logger.info("Response Type got from ORDER HISTORY="
-								+ respFrmGui);
+						logger.info("Response Type got from ORDER HISTORY=" + respFrmGui);
 						if (respFrmGui.equals(remarksArray[i])) {
-							logger.info("Response recieved successfully::"
-									+ respFrmGui + "=" + remarksArray[i]);
+							logger.info("Response recieved successfully::" + respFrmGui + "=" + remarksArray[i]);
 							flag = true;
 							break;
 
 						} else {
-							logger.info("Response is not successfully recieved::"
-									+ remarksArray[i]);
+							logger.info("Response is not successfully recieved::" + remarksArray[i]);
 							flag = false;
 						}
 					}
@@ -122,17 +116,16 @@ public class OrderHistory {
 
 
 
-
 	public boolean VerifyGUIResponsesASR(String ExpectedResponses, Map<String,String>testCaseContext,String ILEC) throws XPathExpressionException, IOException, ParserConfigurationException, SAXException, InterruptedException {
 
-		String xpath ="/order_history/History_Table/ViewPON";
+		String xpath = "/order_history/History_Table/ViewPON";
 		String ViewPON = uiPopulation.getNodeValByXpath(xpath);
-		iedriver.findElement(cn.getLocator(ViewPON)).click(); 
+		iedriver.findElement(cn.getLocator(ViewPON)).click();
 		List<String> explist = new ArrayList<String>();
 
-		File filePath = new File("repository/testdata/input_request_xml/ASR_SEND_ORDER/"
-				+ ILEC + "/" + testCaseContext.get("BODY") + ".xml");
-		System.out.println("file path is :"+ filePath);
+		File filePath = new File("repository/testdata/input_request_xml/ASR_SEND_ORDER/" + ILEC + "/"
+				+ testCaseContext.get("BODY") + ".xml");
+		System.out.println("file path is :" + filePath);
 		DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
 		dbfactory.setNamespaceAware(true);
 		DocumentBuilder dbuilder = dbfactory.newDocumentBuilder();
@@ -189,28 +182,27 @@ public class OrderHistory {
 		String HistoryTable_locator = uiPopulation.getNodeValByXpath(xpath);
 		logger.info("Order_type Locator::" + HistoryTable_locator);
 
-		int Histtabsize=iedriver.findElements(cn.getLocator(HistoryTable_locator)).size();
-		// int sze=iedriver.findElements(By.xpath("//table[@class='List']/tbody/form")).size();
+		int Histtabsize = iedriver.findElements(cn.getLocator(HistoryTable_locator)).size();
+		// int
+		// sze=iedriver.findElements(By.xpath("//table[@class='List']/tbody/form")).size();
 		List<String> list = new ArrayList<String>();
-		System.out.println("Hist tab size"+Histtabsize);
-		for(int i = 0;i <= Histtabsize;i++)
-		{
+		System.out.println("Hist tab size" + Histtabsize);
+		for (int i = 0; i <= Histtabsize; i++) {
 			xpath = "/order_history/History_Table/DynamicTableAtt";
 			String RuntimeTable_locator_status = uiPopulation.getNodeValByXpath(xpath);
-			if(RuntimeTable_locator_status.contains("RUNTIMECnt")){
-				String RuntimeAtt=Integer.toString(i);
+			if (RuntimeTable_locator_status.contains("RUNTIMECnt")) {
+				String RuntimeAtt = Integer.toString(i);
 
-				System.out.println("Rutime att is"+RuntimeAtt);
-				RuntimeTable_locator_status=RuntimeTable_locator_status.replace("RUNTIMECnt",RuntimeAtt);
+				System.out.println("Rutime att is" + RuntimeAtt);
+				RuntimeTable_locator_status = RuntimeTable_locator_status.replace("RUNTIMECnt", RuntimeAtt);
 			}
-			System.out.println("RuntimeTable_locator iss"+RuntimeTable_locator_status);
-
+			System.out.println("RuntimeTable_locator iss" + RuntimeTable_locator_status);
 
 			xpath = "/order_history/History_Table/actDynamicTableAtt";
 			String Act_RuntimeTable_locator = uiPopulation.getNodeValByXpath(xpath);
-			System.out.println("Act_RuntimeTable_locator vv"+Act_RuntimeTable_locator);
-			if(Act_RuntimeTable_locator.contains("RUNTIMECnt")){
-				String actRuntimeAtt=Integer.toString(i);
+			System.out.println("Act_RuntimeTable_locator vv" + Act_RuntimeTable_locator);
+			if (Act_RuntimeTable_locator.contains("RUNTIMECnt")) {
+				String actRuntimeAtt = Integer.toString(i);
 
 				System.out.println("Rutime att is"+actRuntimeAtt);
 				Act_RuntimeTable_locator=Act_RuntimeTable_locator.replace("RUNTIMECnt",actRuntimeAtt);
@@ -226,9 +218,9 @@ public class OrderHistory {
 			}
 
 			//Thread.sleep(1000);
-			if (iedriver.findElement(By.xpath(RuntimeTable_locator_status)).isDisplayed()){
+			if (iedriver.findElement(By.xpath(RuntimeTable_locator_status)).isDisplayed()) {
 
-				String ActualVer=iedriver.findElement(By.xpath(Ver_RuntimeTable_locator)).getText().trim();   
+				String ActualVer = iedriver.findElement(By.xpath(Ver_RuntimeTable_locator)).getText().trim();
 				String ActualStatus=iedriver.findElement(By.xpath(RuntimeTable_locator_status)).getText();
 				String ActualAct=iedriver.findElement(By.xpath(Act_RuntimeTable_locator)).getText();
 				//        xpath|//form[@name=&quot;Transaction-RUNTIMECnt-Form&quot;]/tr/td[6]"/>
@@ -270,27 +262,20 @@ public class OrderHistory {
 		try {
 			logger.info("Recieved action=" + action);
 			List<WebElement> tableRows = iedriver
-					.findElements(By
-							.xpath("//table[@class='Main']/tbody/tr[5]/td/table/tbody/tr"));
+					.findElements(By.xpath("//table[@class='Main']/tbody/tr[5]/td/table/tbody/tr"));
 			System.out.println("test table size=" + tableRows.size());
 			for (int i = 1; i < (tableRows.size() - 1); i++) {
-				System.out.println("printing table row contents="
-						+ tableRows.get(i).getText());
-				logger.info(" innerhtml --> "
-						+ tableRows.get(i).getAttribute("innerHTML"));
+				System.out.println("printing table row contents=" + tableRows.get(i).getText());
+				logger.info(" innerhtml --> " + tableRows.get(i).getAttribute("innerHTML"));
 				logger.info("looping in order history table");
-				String status = tableRows.get(i).findElement(By.xpath("td[3]"))
-						.getText();
+				String status = tableRows.get(i).findElement(By.xpath("td[3]")).getText();
 				logger.info("status" + status);
 				if (status.equalsIgnoreCase("new")) {
 
-					WebElement select = tableRows.get(i).findElement(
-							By.xpath("td[2]"));
+					WebElement select = tableRows.get(i).findElement(By.xpath("td[2]"));
 
-					new Select(select.findElement(By.name("ActionDropDown")))
-					.selectByVisibleText(action);
-					select.findElement(By.xpath("//img[@alt='Perform Action']"))
-					.click();
+					new Select(select.findElement(By.name("ActionDropDown"))).selectByVisibleText(action);
+					select.findElement(By.xpath("//img[@alt='Perform Action']")).click();
 				}
 			}
 			return true;
@@ -301,20 +286,17 @@ public class OrderHistory {
 		}
 	}
 
-	public boolean orderAction(String action) throws XPathExpressionException,
-	IOException, ParserConfigurationException, SAXException {
+	public boolean orderAction(String action)
+			throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
 		try {
 			iedriver.switchTodefault();
 			String button_xpath = "/request/order_history/action_button/";
 			String order_history_button_loc = "";
 
 			button_xpath = button_xpath + "/" + action;
-			order_history_button_loc = uiPopulation
-					.getNodeValByXpath(button_xpath);
-			logger.info("button_loc for SUSPEND ORDER="
-					+ order_history_button_loc);
-			iedriver.findElement(cn.getLocator(order_history_button_loc))
-			.click();
+			order_history_button_loc = uiPopulation.getNodeValByXpath(button_xpath);
+			logger.info("button_loc for SUSPEND ORDER=" + order_history_button_loc);
+			iedriver.findElement(cn.getLocator(order_history_button_loc)).click();
 			logger.info("Order Suspended button clicked for order");
 			return true;
 		} catch (Exception ex) {
@@ -334,7 +316,7 @@ public class OrderHistory {
 		boolean flag = false;
 		try {
 			iedriver.switchTodefault();
-			System.out.println("respType now"+respType);
+			System.out.println("respType now" + respType);
 			Thread.sleep(2000);
 			WebElement elem = iedriver.findElement(By.xpath("//td[contains(text(),'receive')]/parent::tr/td[2]/select"));
 			//WebElement elem = iedriver.findElement(By.xpath("//td[@name=ActionDropDown]"));

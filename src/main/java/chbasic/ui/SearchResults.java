@@ -24,37 +24,35 @@ public class SearchResults {
 		iedriver = driver;
 		logger.info("****** In SEARCH_RESULTS *******");
 	}
-	
-	public boolean accessResultsPage() throws InterruptedException,
-	MalformedURLException {
-try {
-	// Code for switching to search results page
-	String currentWindowHandle = iedriver.getWindowHandle();
-	Set<String> openWindowsList = iedriver.getWindowHandles();
-	logger.info("Number of windows being displayed: "
-			+ openWindowsList.size());
-	String popUpWindowHandle = null;
-	for (String windowHandle : openWindowsList) {
-		if (!windowHandle.equals(currentWindowHandle)){
-			logger.info("Hello I am here" );
-			popUpWindowHandle = windowHandle;
+
+	public boolean accessResultsPage() throws InterruptedException, MalformedURLException {
+		try {
+			// Code for switching to search results page
+			String currentWindowHandle = iedriver.getWindowHandle();
+			Set<String> openWindowsList = iedriver.getWindowHandles();
+			logger.info("Number of windows being displayed: " + openWindowsList.size());
+			String popUpWindowHandle = null;
+			for (String windowHandle : openWindowsList) {
+				if (!windowHandle.equals(currentWindowHandle)) {
+					logger.info("Hello I am here");
+					popUpWindowHandle = windowHandle;
+				}
+			}
+			logger.info("currentWindowHandle" + currentWindowHandle);
+			logger.info("popUpWindowHandle" + popUpWindowHandle);
+			logger.info("iedriver.getTitle" + iedriver.getTitle());
+			iedriver.switchToWindow(popUpWindowHandle);
+			logger.info("iedriver.getTitle1" + iedriver.getTitle());
+			if (iedriver.getTitle().equals("Certificate Error: Navigation Blocked")) {
+				iedriver.get("javascript:document.getElementById('overridelink').click()");
+			}
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			iedriver.stop();
+			return false;
 		}
 	}
-	logger.info("currentWindowHandle" + currentWindowHandle);
-	logger.info("popUpWindowHandle" + popUpWindowHandle);
-	logger.info("iedriver.getTitle" + iedriver.getTitle() );
-	iedriver.switchToWindow(popUpWindowHandle);
-	logger.info("iedriver.getTitle1" + iedriver.getTitle() );
-	if (iedriver.getTitle().equals("Certificate Error: Navigation Blocked")){
-		iedriver.get("javascript:document.getElementById('overridelink').click()");
-	}
-	return true;
-} catch (Exception ex) {
-	ex.printStackTrace();
-	iedriver.stop();
-	return false;
-}
-}
 
 	public boolean viewOrderHistory() throws InterruptedException {
 		try {

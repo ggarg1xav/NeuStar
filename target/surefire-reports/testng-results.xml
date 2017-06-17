@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite1" duration-ms="39" started-at="2017-06-17T12:03:21Z" finished-at="2017-06-17T12:03:21Z">
+  <suite name="Suite1" duration-ms="100" started-at="2017-06-17T16:48:28Z" finished-at="2017-06-17T16:48:28Z">
     <groups>
     </groups>
-    <test name="OMSAutomation Report" duration-ms="39" started-at="2017-06-17T12:03:21Z" finished-at="2017-06-17T12:03:21Z">
+    <test name="OMSAutomation Report" duration-ms="100" started-at="2017-06-17T16:48:28Z" finished-at="2017-06-17T16:48:28Z">
       <class name="chbasic.ui.Demo1">
-        <test-method status="PASS" signature="aa()[pri:0, instance:chbasic.ui.Demo1@56cbfb61]" name="aa" duration-ms="9" started-at="2017-06-17T17:33:21Z" finished-at="2017-06-17T17:33:21Z">
+        <test-method status="PASS" signature="aa()[pri:0, instance:chbasic.ui.Demo1@2d209079]" name="aa" duration-ms="17" started-at="2017-06-17T22:18:28Z" finished-at="2017-06-17T22:18:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- aa -->
