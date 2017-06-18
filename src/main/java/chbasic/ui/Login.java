@@ -130,20 +130,5 @@ public class Login {
 			return false;
 		}
 	}
-	/*	public boolean CloseBrowser() {
-			try {
-				logger.info("Closing the Browser");
-				iedriver.close();
-				logger.info("Browser Closed Successfully");
-				//iedriver.stop();
-				//iedriver.close();
-				return true;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				iedriver.stop();
-				return false;
-			}
-
-	}*/
 
 }

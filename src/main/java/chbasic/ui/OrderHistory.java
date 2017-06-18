@@ -26,11 +26,6 @@ import chbasic.utils.ReadProperties;
 import chbasic.utils.UIDriver;
 import chbasic.utils.UIPopulation;
 
-/**
- * 
- * @author abhishekr.gupta
- * 
- */
 public class OrderHistory {
 
 	private static Logger logger = Logger.getLogger(OrderHistory.class);
@@ -48,12 +43,6 @@ public class OrderHistory {
 		uiPopulation = new UIPopulation(or_path, null, driver);
 		iedriver = driver;
 
-		// DocumentBuilder builder = DocumentBuilderFactory.newInstance()
-		// .newDocumentBuilder();
-		// File or_file = new File(or_path);
-
-		// orDocument = builder.parse(or_file);
-		// uiPopulation = new UIPopulation(order_history_or_path, null, driver);
 		logger.info("parsing order history or file...");
 	}
 
@@ -225,10 +214,10 @@ public class OrderHistory {
 				String ActualAct=iedriver.findElement(By.xpath(Act_RuntimeTable_locator)).getText();
 				//        xpath|//form[@name=&quot;Transaction-RUNTIMECnt-Form&quot;]/tr/td[6]"/>
 				//String ActualStatus=iedriver.findElement(cn.getLocator(RuntimeTable_locator)).getText();
-				String FinActStatus=ActualStatus+":"+ActualAct+":"+ActualVer;
-				System.out.println("act status"+FinActStatus);
+				String FinActStatus = ActualStatus + ":" + ActualAct + ":" + ActualVer;
+				System.out.println("act status" + FinActStatus);
 				list.add(FinActStatus);
-				System.out.println("Displayed list"+list);
+				System.out.println("Displayed list" + list);
 				//}//new if
 
 
@@ -824,39 +813,38 @@ public class OrderHistory {
 		String HistoryTable_locator = uiPopulation.getNodeValByXpath(xpath);
 		logger.info("Order_type Locator::" + HistoryTable_locator);
 
-		int sze=iedriver.findElements(cn.getLocator(HistoryTable_locator)).size();
+		int sze = iedriver.findElements(cn.getLocator(HistoryTable_locator)).size();
 
-		//List<String> list = new ArrayList<String>();
-		System.out.println("szeeee"+sze);
-		for(int i = 0;i <= sze;i++)
-		{
+		// List<String> list = new ArrayList<String>();
+		System.out.println("szeeee" + sze);
+		for (int i = 0; i <= sze; i++) {
 			xpath = "/order_history/History_Table/actDynamicTableAtt";
 			String RuntimeTable_locator = uiPopulation.getNodeValByXpath(xpath);
-			if(RuntimeTable_locator.contains("RUNTIMECnt")){
-				RuntimeAtt=Integer.toString(i+1);
-				System.out.println("Rutime att is"+RuntimeAtt);
-				RuntimeTable_locator=RuntimeTable_locator.replace("RUNTIMECnt",RuntimeAtt);
+			if (RuntimeTable_locator.contains("RUNTIMECnt")) {
+				RuntimeAtt = Integer.toString(i + 1);
+				System.out.println("Rutime att is" + RuntimeAtt);
+				RuntimeTable_locator = RuntimeTable_locator.replace("RUNTIMECnt", RuntimeAtt);
 			}
-			System.out.println("RuntimeTable_locator iss"+RuntimeTable_locator);
+			System.out.println("RuntimeTable_locator iss" + RuntimeTable_locator);
 
-			if (iedriver.findElement(By.xpath(RuntimeTable_locator)).isDisplayed()){
-				System.out.println("RuntimeTable_locator iss"+RuntimeTable_locator);
-				String ActualStatus=iedriver.findElement(By.xpath(RuntimeTable_locator)).getText();
-				System.out.println("Actual status is: "+ActualStatus);
-				if(ActualStatus.equals("save")){
+			if (iedriver.findElement(By.xpath(RuntimeTable_locator)).isDisplayed()) {
+				System.out.println("RuntimeTable_locator iss" + RuntimeTable_locator);
+				String ActualStatus = iedriver.findElement(By.xpath(RuntimeTable_locator)).getText();
+				System.out.println("Actual status is: " + ActualStatus);
+				if (ActualStatus.equals("save")) {
 
 					xpath = "/order_history/History_Table/PerformAct";
 					String RuntimeTable_PerformAct = uiPopulation.getNodeValByXpath(xpath);
-					if(RuntimeTable_PerformAct.contains("RUNTIMECnt")){
-						RuntimeTable_PerformAct=RuntimeTable_PerformAct.replace("RUNTIMECnt",RuntimeAtt);
-						System.out.println("Run time locator is: "+RuntimeTable_PerformAct);
+					if (RuntimeTable_PerformAct.contains("RUNTIMECnt")) {
+						RuntimeTable_PerformAct = RuntimeTable_PerformAct.replace("RUNTIMECnt", RuntimeAtt);
+						System.out.println("Run time locator is: " + RuntimeTable_PerformAct);
 						iedriver.findElement(By.xpath(RuntimeTable_PerformAct)).click();
 						System.out.println("Button clicked");
 						break;
 					}
 
 					break;
-				}	 
+				}
 
 			}
 		}
@@ -866,21 +854,21 @@ public class OrderHistory {
 	}
 
 	public boolean selectSupplement() throws InterruptedException{
-		boolean flag=false;
+		boolean flag = false;
 		List<WebElement> tableRows;
 		logger.info("Clicking view button..");
 
 		iedriver.findElement(By.xpath(".//img[@src='/gateway/images/ViewButton.gif']")).click();
 		Thread.sleep(2000);
-		tableRows=iedriver.findElements(By.xpath("//table[@class='List']/tbody"));
-		for(int i=0;i<tableRows.size();i++){
-			//iedriver.switchTodefault();
+		tableRows = iedriver.findElements(By.xpath("//table[@class='List']/tbody"));
+		for (int i = 0; i < tableRows.size(); i++) {
+			// iedriver.switchTodefault();
 			iedriver.refresh();
-			WebElement temp=tableRows.get(i).findElement(By.xpath("tr["+i+1+"]"));
-			if(temp.getText().contains("submit")){
-				WebElement button=temp.findElement(By.xpath(".//img[@alt='Perform Action']")); 
+			WebElement temp = tableRows.get(i).findElement(By.xpath("tr[" + i + 1 + "]"));
+			if (temp.getText().contains("submit")) {
+				WebElement button = temp.findElement(By.xpath(".//img[@alt='Perform Action']"));
 				button.click();
-				flag=true;
+				flag = true;
 			}
 		}
 		return flag;
@@ -1268,27 +1256,19 @@ public class OrderHistory {
 			logger.info("inside fuction  selectResponseReceivePreorder");
 			logger.info("reqType is : " + reqType);
 			logger.info("response is : " + response);
-			if ((reqType.equals("csr"))
-					|| (reqType.equals("address_validation"))) {
+			if ((reqType.equals("csr")) || (reqType.equals("address_validation"))) {
 				iedriver.switchTodefault();
-				tableRows = iedriver
-						.findElements(By
-								.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/tr"));
+				tableRows = iedriver.findElements(By.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/tr"));
 				logger.info("++++++TABLE ROWS FOUND +++++>: " + tableRows);
 				for (int i = 0; i < tableRows.size(); i++) {
 					logger.info("Checking row : " + "i : " + i + tableRows.get(i).getText());
 					if (tableRows.get(i).getText().contains("receive")) {
-						WebElement select = tableRows.get(i).findElement(
-								By.xpath("form/tr/td[2]"));
+						WebElement select = tableRows.get(i).findElement(By.xpath("form/tr/td[2]"));
 						logger.info("+++++++++++>field going : " + select);
-						new Select(
-								select.findElement(By.name("ActionDropDown")))
-						.selectByVisibleText(response);
+						new Select(select.findElement(By.name("ActionDropDown"))).selectByVisibleText(response);
 						Thread.sleep(2000);
-						WebElement buttonLoc = select.findElement(By
-								.xpath(".//a/img[@alt='Perform Action']"));
-						logger.info("+++++++++++>"
-								+ buttonLoc.getAttribute("alt"));
+						WebElement buttonLoc = select.findElement(By.xpath(".//a/img[@alt='Perform Action']"));
+						logger.info("+++++++++++>" + buttonLoc.getAttribute("alt"));
 						buttonLoc.click();
 						break;
 
@@ -1364,30 +1344,22 @@ public class OrderHistory {
 			logger.info("inside fuction  selectResponseReceivePreorder");
 			logger.info("reqType is : " + reqType);
 			logger.info("response is : " + response);
-			if ((reqType.equals("csr"))
-					|| (reqType.equals("address_validation"))) {
+			if ((reqType.equals("csr")) || (reqType.equals("address_validation"))) {
 				iedriver.switchTodefault();
-				tableRows = iedriver
-						.findElements(By
-								.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/form[" + responseCounter*2 + "]"));
+				tableRows = iedriver.findElements(By.xpath(
+						"//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/form[" + responseCounter * 2 + "]"));
 				logger.info("++++++TABLE ROWS FOUND +++++>: " + tableRows);
 
 				for (int i = 0; i < tableRows.size(); i++) {
 					logger.info("Checking row : " + "i : " + i + tableRows.get(i).getText());
 					if (tableRows.get(i).getText().contains("receive")) {
 
-
-						WebElement select = tableRows.get(i).findElement(
-								By.xpath("tr/td[2]"));
+						WebElement select = tableRows.get(i).findElement(By.xpath("tr/td[2]"));
 						logger.info("+++++++++++>field going : " + select);
-						new Select(
-								select.findElement(By.name("ActionDropDown")))
-						.selectByVisibleText(response);
+						new Select(select.findElement(By.name("ActionDropDown"))).selectByVisibleText(response);
 						Thread.sleep(2000);
-						WebElement buttonLoc = select.findElement(By
-								.xpath(".//a/img[@alt='Perform Action']"));
-						logger.info("+++++++++++>"
-								+ buttonLoc.getAttribute("alt"));
+						WebElement buttonLoc = select.findElement(By.xpath(".//a/img[@alt='Perform Action']"));
+						logger.info("+++++++++++>" + buttonLoc.getAttribute("alt"));
 						buttonLoc.click();
 						break;
 
@@ -1434,27 +1406,19 @@ public class OrderHistory {
 			logger.info("response is : " + response);
 
 			iedriver.switchTodefault();
-			tableRows = iedriver
-					.findElements(By
-							.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/tr"));
+			tableRows = iedriver.findElements(By.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/tr"));
 			logger.info("++++++TABLE ROWS FOUND +++++>: " + tableRows);
 			for (int i = 0; i < tableRows.size(); i++) {
 				logger.info("Checking row : " + "i : " + i + tableRows.get(i).getText());
 				if (tableRows.get(i).getText().contains("receive")) {
-					WebElement select = tableRows.get(i).findElement(
-							By.xpath("form/tr/td[2]"));
+					WebElement select = tableRows.get(i).findElement(By.xpath("form/tr/td[2]"));
 					logger.info("+++++++++++>field going : " + select);
-					new Select(
-							select.findElement(By.name("ActionDropDown")))
-					.selectByValue(response);
+					new Select(select.findElement(By.name("ActionDropDown"))).selectByValue(response);
 					Thread.sleep(2000);
-					WebElement buttonLoc = select.findElement(By
-							.xpath(".//a/img[@alt='Perform Action']"));
-					logger.info("+++++++++++>"
-							+ buttonLoc.getAttribute("alt"));
+					WebElement buttonLoc = select.findElement(By.xpath(".//a/img[@alt='Perform Action']"));
+					logger.info("+++++++++++>" + buttonLoc.getAttribute("alt"));
 					buttonLoc.click();
 					break;
-
 
 				}
 			}
@@ -1483,31 +1447,22 @@ public class OrderHistory {
 			logger.info("response is : " + response);
 
 			iedriver.switchTodefault();
-			tableRows = iedriver
-					.findElements(By
-							.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/form[" + responseCounter*2 + "]"));
+			tableRows = iedriver.findElements(
+					By.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/form[" + responseCounter * 2 + "]"));
 			logger.info("++++++TABLE ROWS FOUND +++++>: " + tableRows);
 
 			for (int i = 0; i < tableRows.size(); i++) {
 				logger.info("Checking row : " + "i : " + i + tableRows.get(i).getText());
 				if (tableRows.get(i).getText().contains("receive")) {
 
-
-					WebElement select = tableRows.get(i).findElement(
-							By.xpath("tr/td[2]"));
+					WebElement select = tableRows.get(i).findElement(By.xpath("tr/td[2]"));
 					logger.info("+++++++++++>field going : " + select);
-					new Select(
-							select.findElement(By.name("ActionDropDown")))
-					.selectByValue(response);
+					new Select(select.findElement(By.name("ActionDropDown"))).selectByValue(response);
 					Thread.sleep(2000);
-					WebElement buttonLoc = select.findElement(By
-							.xpath(".//a/img[@alt='Perform Action']"));
-					logger.info("+++++++++++>"
-							+ buttonLoc.getAttribute("alt"));
+					WebElement buttonLoc = select.findElement(By.xpath(".//a/img[@alt='Perform Action']"));
+					logger.info("+++++++++++>" + buttonLoc.getAttribute("alt"));
 					buttonLoc.click();
 					break;
-
-
 				}
 			}
 
@@ -1532,19 +1487,14 @@ public class OrderHistory {
 		boolean flag = false;
 		try {
 			iedriver.switchTodefault();
-			tableRows = iedriver
-					.findElements(By
-							.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/tr"));
+			tableRows = iedriver.findElements(By.xpath("//table[@class = 'Main']/tbody/tr[5]/td/table/tbody/tr"));
 			tableRows.remove(0);
 			for (int i = 0; i < tableRows.size(); i++) {
 				logger.info("Checking row" + tableRows.get(i).getText());
 				if (tableRows.get(i).getText().contains("submit")) {
-					WebElement select = tableRows.get(i).findElement(
-							By.xpath("td[2]"));
-					new Select(select.findElement(By.name("ActionDropDown")))
-					.selectByVisibleText("Edit");
-					WebElement buttonLoc = select.findElement(By
-							.xpath(".//a/img[@alt='Perform Action']"));
+					WebElement select = tableRows.get(i).findElement(By.xpath("td[2]"));
+					new Select(select.findElement(By.name("ActionDropDown"))).selectByVisibleText("Edit");
+					WebElement buttonLoc = select.findElement(By.xpath(".//a/img[@alt='Perform Action']"));
 					logger.info("+++++++++++>" + buttonLoc.getAttribute("alt"));
 					buttonLoc.click();
 					break;

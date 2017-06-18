@@ -11,12 +11,8 @@ import org.openqa.selenium.WebElement;
 
 import chbasic.utils.UIDriver;
 
-/**
- * 
- * @author abhishekr.gupta
- * 
- */
 public class SearchResults {
+	
 	private static Logger logger = Logger.getLogger(SearchResults.class);
 	UIDriver iedriver;
 
@@ -74,22 +70,21 @@ public class SearchResults {
 //				}
 //			}
 			
-			
 			for (String windowHandle1 : openWindowsList1) {
 				logger.info("hELL0--->" + windowHandle1);
-				
-					logger.info("Hello I am here to Switch Window" );
-					iedriver.switchToWindow(windowHandle1);
-					Thread.sleep(3000);
-					 if(iedriver.getTitle().contains("Order History")){
-						 System.out.println("Yes Finally I am here");
-						 break; 
-					 }else{
-						 System.out.println("No the Destination");
-					 }
-				
+
+				logger.info("Hello I am here to Switch Window");
+				iedriver.switchToWindow(windowHandle1);
+				Thread.sleep(3000);
+				if (iedriver.getTitle().contains("Order History")) {
+					System.out.println("Yes Finally I am here");
+					break;
+				} else {
+					System.out.println("No the Destination");
+				}
+
 			}
-			logger.info("iedriver.getTitle2" + iedriver.getTitle() );
+			logger.info("iedriver.getTitle2" + iedriver.getTitle());
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -97,16 +92,14 @@ public class SearchResults {
 			return false;
 		}
 	}
-		public String getResultCount() {
-		String resultCount = iedriver.findElement(
-				By.xpath("//td[@class='PageCount']")).getText();
+
+	public String getResultCount() {
+		String resultCount = iedriver.findElement(By.xpath("//td[@class='PageCount']")).getText();
 		return resultCount;
 	}
 
 	public String getPageCount() {
-		String pageCount = iedriver.findElement(
-				By.xpath("//div[@id='pageSelection']/table/tbody/tr/td[1]"))
-				.getText();
+		String pageCount = iedriver.findElement(By.xpath("//div[@id='pageSelection']/table/tbody/tr/td[1]")).getText();
 		return pageCount;
 	}
 
@@ -119,12 +112,8 @@ public class SearchResults {
 					String contents = "";
 					for (int tdCounter = 3; tdCounter < 16; tdCounter++) {
 						String tempContents = "";
-						WebElement we = iedriver
-								.findElement(By
-										.xpath("//form[@name='get_detail']/table/tbody/tr["
-												+ trCounter
-												+ "]/td["
-												+ tdCounter + "]"));
+						WebElement we = iedriver.findElement(By.xpath(
+								"//form[@name='get_detail']/table/tbody/tr[" + trCounter + "]/td[" + tdCounter + "]"));
 						tempContents = we.getText();
 						contents = contents + tempContents + ",";
 
@@ -145,12 +134,8 @@ public class SearchResults {
 					String contents = "";
 					for (int tdCounter = 3; tdCounter < 16; tdCounter++) {
 						String tempContents = "";
-						WebElement we = iedriver
-								.findElement(By
-										.xpath("//form[@name='get_detail']/table/tbody/tr["
-												+ trCounter
-												+ "]/td["
-												+ tdCounter + "]"));
+						WebElement we = iedriver.findElement(By.xpath(
+								"//form[@name='get_detail']/table/tbody/tr[" + trCounter + "]/td[" + tdCounter + "]"));
 						tempContents = we.getText();
 						contents = contents + tempContents + ",";
 

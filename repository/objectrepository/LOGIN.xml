@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<login>
+	<login_fields>
+		<DOMAIN value="name|NF_CustomerId" />
+		<USERNAME value="name|NF_UserName" />
+		<PASSWORD value="name|NF_Password" />
+	</login_fields>
+	<login_button value="xpath|//input[@type='image']" />
+</login>
